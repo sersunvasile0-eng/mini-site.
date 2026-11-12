@@ -65,6 +65,15 @@ button{width:100%;height:50px;border:0;background:var(--green);color:white;font:
       <p class="error" id="error" aria-live="polite"></p>
       <p class="sub" style="font-size:11px;margin:12px 0 0">Нажимая «Войти», вы соглашаетесь с записью указанного имени и времени посещения.</p>
     </form>
+    <section id="passwordStep" hidden>
+      <p class="sub">Имя принято. Теперь введите пароль для доступа к ленте.</p>
+      <form id="passwordForm" novalidate>
+        <div class="field"><label for="visitorPassword">ПАРОЛЬ</label><input id="visitorPassword" type="password" placeholder="Введите пароль" autocomplete="current-password" required></div>
+        <button type="submit" id="passwordButton">ПРОДОЛЖИТЬ</button>
+        <p class="error" id="passwordError" aria-live="polite"></p>
+        <button type="button" id="backToName" style="margin-top:10px;background:transparent;color:var(--green);border:1px solid var(--line)">НАЗАД</button>
+      </form>
+    </section>
     <button type="button" id="adminButton" style="margin-top:12px;background:transparent;color:var(--green);border:1px solid var(--line)">АДМИНИСТРАТОР</button>
     <p class="error" id="adminError" aria-live="polite"></p>
     <section id="adminPanel" hidden style="margin-top:18px;text-align:left">
@@ -149,9 +158,10 @@ function unlock(name) {
 const savedName = sessionStorage.getItem("moara-name");
 if (savedName) unlock(savedName);
 
-document.getElementById("loginForm").addEventListener("submit", async function(e) {
+let pendingVisitorName = "";
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
-  const button = document.getElementById("loginButton");
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
   if (!firstName || !lastName) {
@@ -160,23 +170,49 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   }
   const namePattern = /^[A-Za-zА-Яа-яЁёÀ-ž][A-Za-zА-Яа-яЁёÀ-ž'-]*$/;
   if (!namePattern.test(firstName) || !namePattern.test(lastName) ||
-      /^(.)\1+$/i.test(firstName) || /^(.)\1+$/i.test(lastName)) {
-    errorBox.textContent = "Введи настоящее имя и фамилию буквами, каждое отдельно.";
+      /^(.)\\1+$/i.test(firstName) || /^(.)\\1+$/i.test(lastName)) {
+    errorBox.textContent = "Введи имя и фамилию буквами, каждое отдельно.";
     return;
   }
-  const name = firstName + " " + lastName;
+  pendingVisitorName = firstName + " " + lastName;
   errorBox.textContent = "";
+  document.getElementById("loginForm").hidden = true;
+  document.getElementById("passwordStep").hidden = false;
+  document.getElementById("visitorPassword").focus();
+});
+
+document.getElementById("backToName").addEventListener("click", function() {
+  document.getElementById("passwordStep").hidden = true;
+  document.getElementById("loginForm").hidden = false;
+  document.getElementById("passwordError").textContent = "";
+});
+
+document.getElementById("passwordForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const button = document.getElementById("passwordButton");
+  const passwordError = document.getElementById("passwordError");
+  const password = document.getElementById("visitorPassword").value;
+  if (!password) {
+    passwordError.textContent = "Введите пароль.";
+    return;
+  }
   button.disabled = true;
-  button.textContent = "ПОДОЖДИТЕ…";
+  button.textContent = "ПРОВЕРКА…";
+  passwordError.textContent = "";
   try {
-    await rpc("record_site_visit", {p_full_name:name});
-    sessionStorage.setItem("moara-name", name);
-    unlock(name);
+    const valid = await rpc("verify_site_entry", {p_password:password});
+    if (valid !== true) {
+      passwordError.textContent = "Неверный пароль. Попробуйте ещё раз.";
+      return;
+    }
+    await rpc("record_site_visit", {p_full_name:pendingVisitorName});
+    sessionStorage.setItem("moara-name", pendingVisitorName);
+    unlock(pendingVisitorName);
   } catch (err) {
-    errorBox.textContent = err.message || "Не удалось войти. Попробуйте ещё раз.";
+    passwordError.textContent = err.message || "Не удалось войти. Попробуйте ещё раз.";
   } finally {
     button.disabled = false;
-    button.textContent = "ВОЙТИ В ЛЕНТУ";
+    button.textContent = "ПРОДОЛЖИТЬ";
   }
 });
 
