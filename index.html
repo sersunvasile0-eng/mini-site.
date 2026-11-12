@@ -25,7 +25,7 @@ h1{font-size:26px;margin:0 0 18px}input,button{width:100%;font:inherit;padding:1
 .video-card h3{margin:0 0 7px;font-size:20px}
 .video-card p{margin:0 0 18px;color:#e8dfd2;font-size:14px;line-height:1.45}
 .watch-link{display:block;width:100%;padding:14px 18px;border-radius:13px;background:#f5d58e;color:#392b12;text-decoration:none;font-weight:800;font-size:16px}
-.video-note{margin-top:11px;color:#d5cabb;font-size:12px}
+.video-frame{width:100%;aspect-ratio:9/16;max-height:620px;border:0;border-radius:14px;background:#111;display:block}
 .credit{margin:24px 0 2px;padding-top:16px;border-top:1px solid #eee;color:#8b8175;font-size:13px;letter-spacing:.3px}
 .credit strong{color:#5b5147;font-weight:700}
 </style>
@@ -42,7 +42,7 @@ const p=document.getElementById('password').value.normalize('NFC').trim();
 if(p==='Măhăluță'){
 document.getElementById('login').style.display='none';
 const result=document.getElementById('result');
-result.innerHTML='<div class="notice"><div class="notice-title">⚠️ Важное предупреждение</div><p>Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> <span class="heart">❤️</span></p></div><div class="video-card"><div class="video-icon">▶</div><h3>Видео из Moara de piatră</h3><p>Нажми кнопку ниже, чтобы посмотреть ролик в удобном полноэкранном плеере</p><a class="watch-link" href="https://drive.google.com/file/d/1wW5vw66nJDBZeCy39SEQKhq5t9max4CQ/view" >▶ Смотреть видео</a><div class="video-note">Откроется в отдельном окне</div></div><img src="cow.jpg" alt="Сельский пейзаж с коровой"><h2>Деревенская шлюха</h2><div class="credit">Разработчик <strong>sersunlovesyou</strong></div>';
+result.innerHTML='<div class="notice"><div class="notice-title">⚠️ Важное предупреждение</div><p>Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> <span class="heart">❤️</span></p></div><div class="video-card"><h3>Видео из Moara de piatră</h3><p>Смотри видео прямо здесь, не переходя на другие сайты</p><iframe class="video-frame" src="https://drive.google.com/file/d/1wW5vw66nJDBZeCy39SEQKhq5t9max4CQ/preview" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Видео из Moara de piatră"></iframe></div><img src="cow.jpg" alt="Сельский пейзаж с коровой"><h2>Деревенская шлюха</h2><div class="credit">Разработчик <strong>sersunlovesyou</strong></div>';
 result.style.display='block';
 }else{document.getElementById('error').textContent='Неверный пароль'}
 });
