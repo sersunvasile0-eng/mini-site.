@@ -76,8 +76,8 @@ h1{font-size:26px;margin:0 0 18px}
 <script>
 document.getElementById('form').addEventListener('submit',function(e){
 e.preventDefault();
-const p=document.getElementById('password').value.normalize('NFC').trim();
-if(p==='Măhăluță'){
+const p=document.getElementById('password').value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[țţ]/gi,'t').replace(/[șş]/gi,'s').toLocaleLowerCase('ro').trim();
+if(p==='mahaluta'){
 document.getElementById('login').style.display='none';
 const result=document.getElementById('result');
 result.innerHTML='<div class="notice"><div class="notice-title">⚠️ Важное предупреждение</div><p>Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> <span class="heart">❤️</span></p></div><div class="video-card"><h3>Видео из Moara de piatră</h3><p>Смотри видео прямо здесь, не переходя на другие сайты</p><div class="custom-player" id="customPlayer">
