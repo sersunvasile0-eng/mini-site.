@@ -59,8 +59,8 @@ button{width:100%;height:50px;border:0;background:var(--green);color:white;font:
     <h1>Добро пожаловать</h1>
     <p class="sub">Введите имя и фамилию из списка распространённых в Молдове, чтобы открыть сельскую ленту новостей.</p>
     <form id="loginForm">
-      <div class="field"><label for="firstName">ИМЯ</label><input id="firstName" type="text" placeholder="Например, Иван" autocomplete="given-name" minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁёÀ-ž'-]{2,40}" required></div>
-      <div class="field"><label for="lastName">ФАМИЛИЯ</label><input id="lastName" type="text" placeholder="Например, Попеску" autocomplete="family-name" minlength="2" maxlength="60" pattern="[A-Za-zА-Яа-яЁёÀ-ž'-]{2,60}" required></div>
+      <div class="field"><label for="firstName">ИМЯ</label><input id="firstName" type="text" placeholder="Например, Иван" autocomplete="given-name" autocapitalize="words" spellcheck="false" maxlength="40" required></div>
+      <div class="field"><label for="lastName">ФАМИЛИЯ</label><input id="lastName" type="text" placeholder="Например, Попеску" autocomplete="family-name" autocapitalize="words" spellcheck="false" maxlength="60" required></div>
       <button type="submit" id="loginButton">ВОЙТИ В ЛЕНТУ</button>
       <p class="error" id="error" aria-live="polite"></p>
       <p class="sub" style="font-size:11px;margin:12px 0 0">Нажимая «Войти», вы соглашаетесь с записью указанного имени и времени посещения.</p>
