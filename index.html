@@ -3,77 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090b10">
-<title>Moara de piatră</title>
+<meta name="theme-color" content="#f4f0e7">
+<title>Moara de piatră — Сельские новости</title>
 <style>
-:root{color-scheme:dark;--bg:#090b10;--panel:#141923;--muted:#9ca7b8;--accent:#d5a85d;--line:#293241}
+:root{color-scheme:light;--paper:#f4f0e7;--card:#fffdf8;--ink:#24251f;--muted:#77786e;--line:#e5dfd2;--red:#a83d2d;--green:#52694b;--gold:#d3a64e}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#28364a 0%,#101722 38%,var(--bg) 75%);color:#f6f3ed;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
 button,input{font:inherit}
-.login-wrap{min-height:100svh;display:grid;place-items:center;padding:24px}
-.login-card{width:min(100%,420px);padding:34px 28px 30px;border:1px solid #ffffff18;border-radius:28px;background:linear-gradient(145deg,#1b2431ee,#10151eee);box-shadow:0 28px 90px #0009;text-align:center}
-.mark{width:54px;height:54px;display:grid;place-items:center;margin:0 auto 22px;border-radius:18px;background:#d5a85d18;color:var(--accent);font-size:25px}
-.eyebrow{margin:0 0 9px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
-h1{margin:0;font-size:30px;letter-spacing:-.04em}
-.login-card .sub{margin:12px 0 26px;color:var(--muted);font-size:14px;line-height:1.6}
+.login-wrap{min-height:100svh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 20%,#fffaf0,var(--paper) 70%)}
+.login-card{width:min(100%,420px);padding:36px 30px;border:1px solid var(--line);background:var(--card);box-shadow:0 18px 60px #473b2418;text-align:center}
+.mark{width:54px;height:54px;display:grid;place-items:center;margin:0 auto 18px;border-radius:50%;background:#52694b;color:white;font-size:25px}
+.eyebrow{margin:0 0 10px;color:var(--red);font:800 11px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+h1{margin:0;font-size:32px}
+.login-card .sub{margin:12px 0 26px;color:var(--muted);font:14px/1.6 Arial,sans-serif}
 .field{text-align:left;margin:0 0 14px}
-label{display:block;margin:0 0 8px;color:#c5ccd7;font-size:12px;font-weight:650}
-input{width:100%;height:52px;padding:0 16px;border:1px solid var(--line);border-radius:14px;background:#0b1018;color:white;outline:none}
-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #d5a85d20}
-button{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(100deg,#e3bd79,#bd8840);color:#17130d;font-weight:800;cursor:pointer}
-.error{min-height:20px;margin:12px 0 0;color:#ff9d91;font-size:13px}
-.site{display:none;max-width:1000px;margin:auto;padding:28px 20px 54px}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
-.brand{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
-.pill{padding:8px 12px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:11px}
-.hero{text-align:center;margin:0 auto 24px}
-.hero h2{margin:0;font-size:clamp(26px,5vw,42px);letter-spacing:-.04em}
-.hero p{margin:10px 0 0;color:var(--muted);font-size:14px}
-.player-card{max-width:520px;margin:0 auto;padding:10px;border:1px solid #ffffff18;border-radius:24px;background:linear-gradient(145deg,#1b2431,#10151e);box-shadow:0 24px 70px #0007}
-.player{width:100%;aspect-ratio:9/16;max-height:78svh;display:block;border:0;border-radius:16px;background:#000}
-.note{max-width:760px;margin:24px auto 0;padding:18px 20px;border:1px solid #d5a85d35;border-radius:18px;background:#d5a85d0d;color:#d5dbe4;font-size:14px;line-height:1.65;text-align:center}
-.note strong{color:#edc783}
-.cow{display:block;width:min(100%,560px);height:auto;margin:24px auto 0;border-radius:18px;border:1px solid #ffffff20}
-.caption{text-align:center;margin:18px 0 0;font-size:clamp(23px,4vw,30px);font-weight:800}
-.credit{text-align:center;margin:10px 0 0;color:var(--muted);font-size:12px}
-.credit strong{color:#e4bd7c}
-@media(min-width:700px){.site{padding-top:38px}.player-card{padding:12px}.player{max-height:75vh}}
-
-.post-card{max-width:760px;margin:26px auto 0;padding:14px;border:1px solid #ffffff1c;border-radius:22px;background:linear-gradient(145deg,#1b2431,#10151e);box-shadow:0 18px 48px #0005}
-.post-meta{display:flex;justify-content:space-between;gap:12px;padding:5px 4px 13px;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.15em}
-.post-image{display:block;width:100%;height:auto;max-height:850px;object-fit:contain;border-radius:14px;background:#080a0e}
-.post-caption{margin:13px 5px 3px;color:#d7deea;font-size:14px;text-align:center}
-
+label{display:block;margin:0 0 8px;color:var(--muted);font:700 11px Arial,sans-serif}
+input{width:100%;height:50px;padding:0 14px;border:1px solid var(--line);background:white;color:var(--ink);outline:none}
+input:focus{border-color:var(--green)}
+button{width:100%;height:50px;border:0;background:var(--green);color:white;font:700 13px Arial,sans-serif;cursor:pointer}
+.error{min-height:20px;margin:12px 0 0;color:var(--red);font:13px Arial,sans-serif}
+.site{display:none;max-width:1120px;margin:auto;padding:0 22px 60px}
+.masthead{padding:24px 0 18px;text-align:center;border-bottom:3px double var(--ink)}
+.mast-kicker{font:700 10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+.masthead h2{margin:7px 0 2px;font-size:clamp(36px,7vw,66px);line-height:1;letter-spacing:-.055em}
+.mast-sub{margin:10px 0 0;color:var(--muted);font:12px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.nav{display:flex;justify-content:center;gap:24px;padding:12px 0;border-bottom:1px solid var(--line);font:700 11px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ticker{margin:16px 0 22px;padding:10px 13px;background:var(--red);color:white;font:700 11px Arial,sans-serif;letter-spacing:.04em}
+.ticker b{margin-right:10px;color:#ffe2a5}
+.feed-heading{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:800 12px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.feed-heading:after{content:"";height:1px;flex:1;background:var(--line)}
+.feed{max-width:790px;margin:auto}
+.post{margin:0 0 20px;padding:20px;background:var(--card);border:1px solid var(--line);box-shadow:0 5px 18px #463a2410}
+.post-top{display:flex;justify-content:space-between;gap:12px;margin-bottom:12px;color:var(--red);font:800 10px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.post h3{margin:0 0 8px;font-size:clamp(22px,4vw,31px);line-height:1.12}
+.deck{margin:0 0 16px;color:var(--muted);font:14px/1.55 Arial,sans-serif}
+.player-frame{padding:8px;background:#222}
+.player{width:100%;aspect-ratio:9/16;max-height:76svh;display:block;border:0;background:#000}
+.note{margin:14px 0 0;padding:15px 16px;border-left:4px solid var(--gold);background:#f8f1df;color:#555344;font:13px/1.65 Arial,sans-serif}
+.note strong{color:var(--red)}
+.post-image{display:block;width:100%;height:auto;max-height:900px;object-fit:contain;background:#f0eadf}
+.post-caption{margin:12px 0 0;text-align:center;color:var(--muted);font:13px Arial,sans-serif}
+.cow{display:block;width:100%;height:auto;max-height:520px;object-fit:cover}
+.caption{margin:14px 0 0;font-size:clamp(25px,4vw,34px);font-weight:bold;text-align:center}
+.post-footer{display:flex;justify-content:space-between;gap:12px;margin-top:14px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font:10px Arial,sans-serif}
+.footer{text-align:center;margin:28px 0 0;padding:20px 0;border-top:3px double var(--ink);color:var(--muted);font:11px/1.7 Arial,sans-serif}
+.footer strong{color:var(--red)}
+@media(max-width:600px){.site{padding:0 12px 38px}.masthead{padding-top:22px}.nav{gap:13px;font-size:9px}.post{padding:14px}.post-top{font-size:9px}.ticker{font-size:10px}}
 </style>
 </head>
 <body>
 <section class="login-wrap" id="login">
   <div class="login-card">
     <div class="mark">✦</div>
-    <p class="eyebrow">Moara de piatră</p>
+    <p class="eyebrow">Ediție locală · Moara de piatră</p>
     <h1>Добро пожаловать</h1>
-    <p class="sub">Введите пароль, чтобы открыть страницу с видео.</p>
+    <p class="sub">Введите пароль, чтобы открыть сельскую ленту новостей.</p>
     <form id="loginForm">
       <div class="field"><label for="password">ПАРОЛЬ</label><input id="password" type="password" placeholder="Введите пароль" autocomplete="current-password" required></div>
-      <button type="submit">Открыть сайт</button>
+      <button type="submit">ВОЙТИ В ЛЕНТУ</button>
       <p class="error" id="error" aria-live="polite"></p>
     </form>
   </div>
 </section>
 <main class="site" id="site">
-  <div class="topline"><div class="brand">Moara de piatră</div><div class="pill">PRIVATE VIDEO</div></div>
-  <header class="hero"><h2>Видео из Moara de piatră</h2><p>Нажми ▶ для просмотра · ⛶ — полный экран</p></header>
-  <div class="player-card"><iframe class="player" src="https://player.vimeo.com/video/1246377567?h=5ac0acb18f" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin" title="Видео из Moara de piatră"></iframe></div>
-  <section class="note">⚠️ Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> ❤️</section>
-
-  <article class="post-card">
-    <div class="post-meta"><span>НОВЫЙ ПОСТ</span><span>MOARA DE PIATRĂ</span></div>
-    <img class="post-image" src="post.jpg" alt="Мем с румынским текстом">
-    <p class="post-caption">Народная мудрость 😄</p>
-  </article>
-  <img class="cow" src="cow.jpg" alt="Сельский пейзаж с коровой">
-  <div class="caption">Деревенская шлюха</div>
-  <div class="credit">Разработчик <strong>sersunlovesyou</strong></div>
+  <header class="masthead">
+    <div class="mast-kicker">Газета · Объявления · Сельская жизнь</div>
+    <h2>Moara de piatră</h2>
+    <p class="mast-sub">Главные события нашего большого села</p>
+  </header>
+  <nav class="nav"><span>Новости</span><span>Жизнь села</span><span>Медиа</span><span>Объявления</span></nav>
+  <div class="ticker"><b>СРОЧНО •</b> В селе снова есть о чём поговорить. Читайте главные новости и не проходите мимо свежих публикаций!</div>
+  <section class="feed">
+    <h3 class="feed-heading">Лента публикаций</h3>
+    <article class="post">
+      <div class="post-top"><span>Главное видео</span><span>Медиа села</span></div>
+      <h3>Видео дня: свежие кадры из Moara de piatră</h3>
+      <p class="deck">Смотрите новый ролик, делитесь впечатлениями и следите за обновлениями нашей сельской редакции.</p>
+      <div class="player-frame"><iframe class="player" src="https://player.vimeo.com/video/1246377567?h=5ac0acb18f" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin" title="Видео из Moara de piatră"></iframe></div>
+      <div class="note">⚠️ Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> ❤️</div>
+      <div class="post-footer"><span>РЕДАКЦИЯ MOARA DE PIATRĂ</span><span>ВИДЕОПУБЛИКАЦИЯ</span></div>
+    </article>
+    <article class="post">
+      <div class="post-top"><span>Народная мудрость</span><span>Юмор · Обсуждают</span></div>
+      <h3>Цитата дня, которую уже обсуждают на улицах</h3>
+      <p class="deck">Некоторые мысли настолько точные, что лучше всяких комментариев.</p>
+      <img class="post-image" src="post.jpg" alt="Мем с румынским текстом">
+      <p class="post-caption">Народная мудрость 😄</p>
+      <div class="post-footer"><span>СЕЛЬСКИЙ ФОЛЬКЛОР</span><span>ПОСТ № 02</span></div>
+    </article>
+    <article class="post">
+      <div class="post-top"><span>Жизнь села</span><span>Фоторепортаж</span></div>
+      <h3>Наши сельские будни</h3>
+      <p class="deck">Без деревенского колорита наша лента была бы совсем не той.</p>
+      <img class="cow" src="cow.jpg" alt="Сельский пейзаж с коровой">
+      <p class="caption">Деревенская шлюха</p>
+      <div class="post-footer"><span>ФОТОДНЕВНИК СЕЛА</span><span>ПОСТ № 03</span></div>
+    </article>
+  </section>
+  <footer class="footer">Это развлекательная сельская лента. Все публикации — с юмором и любовью к родному селу.<br>Разработчик: <strong>sersunlovesyou</strong> · Moara de piatră ©</footer>
 </main>
 <script>
 const PASSWORD = "Măhăluță";
