@@ -42,6 +42,9 @@ button{width:100%;height:50px;border:0;background:var(--green);color:white;font:
 .note{margin:14px 0 0;padding:15px 16px;border-left:4px solid var(--gold);background:#f8f1df;color:#555344;font:13px/1.65 Arial,sans-serif}
 .note strong{color:var(--red)}
 .post-image{display:block;width:100%;height:auto;max-height:900px;object-fit:contain;background:#f0eadf}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.photo-grid img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;background:#f0eadf}
+@media(max-width:520px){.photo-grid{grid-template-columns:1fr}.photo-grid img{max-height:none}}
 .post-caption{margin:12px 0 0;text-align:center;color:var(--muted);font:13px Arial,sans-serif}
 .cow{display:block;width:100%;height:auto;max-height:520px;object-fit:cover}
 .caption{margin:14px 0 0;font-size:clamp(25px,4vw,34px);font-weight:bold;text-align:center}
@@ -96,6 +99,12 @@ button{width:100%;height:50px;border:0;background:var(--green);color:white;font:
       <div class="post-top"><span>12 ноября 2026</span><span>Срочная новость · Сельская хроника</span></div>
       <h3>СЕНСАЦИЯ В MOARA DE PIATRĂ: ПРОПАЛИ 2 КГ BRÂNZĂ И ЛИТР DE JIN!</h3>
       <p class="deck">В редакцию поступили сенсационные сведения о дерзком происшествии: неизвестный подозревается в исчезновении двух килограммов brânză и одного литра de jin. По версии нашей сельской хроники, после этого он скрылся на căruță. Жители внимательно следят за развитием событий.</p>
+      <div class="photo-grid">
+        <img src="https://i.ibb.co/C36R3j9W/IMG-1622.png" alt="Фото к шуточной сельской новости" loading="lazy">
+        <img src="https://i.ibb.co/1JdqKs3s/IMG-1623.png" alt="Фото к шуточной сельской новости" loading="lazy">
+        <img src="https://i.ibb.co/vvM5tHt7/IMG-1624.png" alt="Фото к шуточной сельской новости" loading="lazy">
+        <img src="https://i.ibb.co/RGbmWHS9/60089-AEB-7-FA1-4-E0E-AF38-49D1E9EB030B.png" alt="Фото к шуточной сельской новости" loading="lazy">
+      </div>
       <div class="note">История выдумана редакцией в юмористических целях.</div>
       <div class="post-footer"><span>СЕЛЬСКОЕ РАССЛЕДОВАНИЕ</span><span>СВЕЖИЙ ПОСТ</span></div>
     </article>
