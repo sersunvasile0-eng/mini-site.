@@ -80,7 +80,37 @@ const p=document.getElementById('password').value.normalize('NFC').trim();
 if(p==='Măhăluță'){
 document.getElementById('login').style.display='none';
 const result=document.getElementById('result');
-result.innerHTML='<div class="notice"><div class="notice-title">⚠️ Важное предупреждение</div><p>Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> <span class="heart">❤️</span></p></div><div class="video-card"><h3>Видео из Moara de piatră</h3><p>Смотри видео прямо здесь, не переходя на другие сайты</p><iframe class="video-frame" src="https://drive.google.com/file/d/1wW5vw66nJDBZeCy39SEQKhq5t9max4CQ/preview" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="Видео из Moara de piatră"></iframe></div><img src="cow.jpg" alt="Сельский пейзаж с коровой"><h2>Деревенская шлюха</h2><div class="credit">Разработчик <strong>sersunlovesyou</strong></div>';
+result.innerHTML='<div class="notice"><div class="notice-title">⚠️ Важное предупреждение</div><p>Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> <span class="heart">❤️</span></p></div><div class="video-card"><h3>Видео из Moara de piatră</h3><p>Смотри видео прямо здесь, не переходя на другие сайты</p><div class="custom-player" id="customPlayer">
+<video id="siteVideo" playsinline preload="metadata" poster="" aria-label="Видео из Moara de piatră">
+<source src="https://drive.google.com/uc?export=download&id=1wW5vw66nJDBZeCy39SEQKhq5t9max4CQ" type="video/mp4">
+</video>
+<div class="player-bar">
+<button type="button" id="playToggle" aria-label="Воспроизвести">▶</button>
+<span id="currentTime">0:00</span>
+<input id="videoSeek" type="range" min="0" max="1000" value="0" aria-label="Перемотка видео">
+<span id="duration">0:00</span>
+<button type="button" id="muteToggle" aria-label="Звук">🔊</button>
+<button type="button" id="fullToggle" aria-label="На весь экран">⛶</button>
+</div>
+</div></div><img src="cow.jpg" alt="Сельский пейзаж с коровой"><h2>Деревенская шлюха</h2><div class="credit">Разработчик <strong>sersunlovesyou</strong></div>';
+
+const video=document.getElementById('siteVideo');
+const play=document.getElementById('playToggle');
+const seek=document.getElementById('videoSeek');
+const current=document.getElementById('currentTime');
+const duration=document.getElementById('duration');
+const mute=document.getElementById('muteToggle');
+const fmt=t=>{if(!Number.isFinite(t))return '0:00';const m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+String(s).padStart(2,'0')};
+play.addEventListener('click',()=>{if(video.paused)video.play().catch(()=>{});else video.pause()});
+video.addEventListener('play',()=>{play.textContent='Ⅱ';play.setAttribute('aria-label','Пауза')});
+video.addEventListener('pause',()=>{play.textContent='▶';play.setAttribute('aria-label','Воспроизвести')});
+video.addEventListener('loadedmetadata',()=>{duration.textContent=fmt(video.duration)});
+video.addEventListener('timeupdate',()=>{current.textContent=fmt(video.currentTime);if(Number.isFinite(video.duration)&&video.duration>0)seek.value=String(video.currentTime/video.duration*1000)});
+seek.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=Number(seek.value)/1000*video.duration});
+mute.addEventListener('click',()=>{video.muted=!video.muted;mute.textContent=video.muted?'🔇':'🔊'});
+document.getElementById('fullToggle').addEventListener('click',()=>{const box=document.getElementById('customPlayer');if(box.requestFullscreen)box.requestFullscreen().catch(()=>{});});
+video.addEventListener('error',()=>{current.textContent='Видео недоступно';});
+
 result.style.display='block';
 
 }else{document.getElementById('error').textContent='Неверный пароль'}
