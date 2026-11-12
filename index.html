@@ -58,7 +58,7 @@ button{width:100%;height:50px;border:0;background:var(--green);color:white;font:
     <p class="eyebrow">Ediție locală · Moara de piatră</p>
     <h1>Добро пожаловать</h1>
     <p class="sub">Введите имя и фамилию из списка распространённых в Молдове, чтобы открыть сельскую ленту новостей.</p>
-    <form id="loginForm">
+    <form id="loginForm" novalidate>
       <div class="field"><label for="firstName">ИМЯ</label><input id="firstName" type="text" placeholder="Например, Иван" autocomplete="given-name" autocapitalize="words" spellcheck="false" maxlength="40" required></div>
       <div class="field"><label for="lastName">ФАМИЛИЯ</label><input id="lastName" type="text" placeholder="Например, Попеску" autocomplete="family-name" autocapitalize="words" spellcheck="false" maxlength="60" required></div>
       <button type="submit" id="loginButton">ВОЙТИ В ЛЕНТУ</button>
@@ -154,6 +154,10 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   const button = document.getElementById("loginButton");
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
+  if (!firstName || !lastName) {
+    errorBox.textContent = "Введи и имя, и фамилию.";
+    return;
+  }
   const namePattern = /^[A-Za-zА-Яа-яЁёÀ-ž][A-Za-zА-Яа-яЁёÀ-ž'-]*$/;
   if (!namePattern.test(firstName) || !namePattern.test(lastName) ||
       /^(.)\1+$/i.test(firstName) || /^(.)\1+$/i.test(lastName)) {
