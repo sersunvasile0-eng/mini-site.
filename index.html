@@ -192,6 +192,7 @@ function unlock(name) {
   welcome.style.cssText = "text-align:center;padding:10px;color:var(--green);font:12px Arial,sans-serif";
   welcome.textContent = "Вы вошли как: " + name;
   site.prepend(welcome);
+  if (typeof loadPostInteractions === "function") loadPostInteractions();
 }
 const savedName = sessionStorage.getItem("moara-name");
 if (savedName) unlock(savedName);
@@ -261,7 +262,18 @@ async function loadPostInteractions() {
   const posts = Array.from(document.querySelectorAll(".feed article.post"));
   posts.forEach((post, index) => {
     post.dataset.postId = "post-" + (index + 1);
-    if (post.querySelector(".interactions")) return;
+    if (post.querySelector(".interactions")) {
+      const existingPanel = post.querySelector(".interactions");
+      const existingButton = existingPanel.querySelector(".like-button");
+      const existingCount = existingPanel.querySelector(".like-count");
+      rpc("get_post_interactions", {p_post_ids:[post.dataset.postId],p_visitor_name:visitorName}).then(result => {
+        const state = result[post.dataset.postId] || {likes:0,liked:false};
+        existingButton.classList.toggle("liked", !!state.liked);
+        existingButton.textContent = state.liked ? "♥ Нравится" : "♡ Нравится";
+        existingCount.textContent = (state.likes || 0) + " лайков";
+      }).catch(() => {});
+      return;
+    }
     const panel = document.createElement("section");
     panel.className = "interactions";
     panel.innerHTML = '<div class="interaction-actions"><button type="button" class="like-button">♡ Нравится</button><span class="like-count">Загрузка…</span></div><div class="comment-title">Комментарии</div><form class="comment-form"><input class="comment-input" type="text" maxlength="600" placeholder="Напишите комментарий…" required><button class="comment-submit" type="submit">ОТПРАВИТЬ</button></form><div class="interaction-error" aria-live="polite"></div><div class="comment-list"></div>';
@@ -300,14 +312,16 @@ async function loadPostInteractions() {
       }
     }
     async function refresh() {
-      const data = await rpc("get_post_interactions", {p_post_ids:[post.dataset.postId],p_visitor_name:visitorName});
+      const activeName = sessionStorage.getItem("moara-name") || "";
+      const data = await rpc("get_post_interactions", {p_post_ids:[post.dataset.postId],p_visitor_name:activeName});
       render(data[post.dataset.postId] || {likes:0,liked:false,comments:[]});
     }
     likeButton.addEventListener("click", async () => {
-      if (!visitorName) { error.textContent = "Сначала войдите на сайт."; return; }
+      const activeName = sessionStorage.getItem("moara-name") || "";
+      if (!activeName) { error.textContent = "Сначала войдите на сайт."; return; }
       likeButton.disabled = true; error.textContent = "";
       try {
-        const data = await rpc("toggle_post_like", {p_post_id:post.dataset.postId,p_visitor_name:visitorName});
+        const data = await rpc("toggle_post_like", {p_post_id:post.dataset.postId,p_visitor_name:activeName});
         likeButton.classList.toggle("liked", !!data.liked);
         likeButton.textContent = data.liked ? "♥ Нравится" : "♡ Нравится";
         likeCount.textContent = (data.likes || 0) + " лайков";
@@ -316,13 +330,14 @@ async function loadPostInteractions() {
     });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!visitorName) { error.textContent = "Сначала войдите на сайт."; return; }
+      const activeName = sessionStorage.getItem("moara-name") || "";
+      if (!activeName) { error.textContent = "Сначала войдите на сайт."; return; }
       const text = escapeCommentText(input.value.trim());
       if (!text) return;
       const submit = form.querySelector("button");
       submit.disabled = true; error.textContent = "";
       try {
-        await rpc("add_post_comment", {p_post_id:post.dataset.postId,p_visitor_name:visitorName,p_comment_text:text});
+        await rpc("add_post_comment", {p_post_id:post.dataset.postId,p_visitor_name:activeName,p_comment_text:text});
         input.value = "";
         await refresh();
       } catch (err) { error.textContent = err.message || "Не удалось отправить комментарий."; }
