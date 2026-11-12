@@ -3,39 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b10">
 <title>Moara de piatră</title>
-<meta name="theme-color" content="#111">
 <style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#141923;--muted:#9ca7b8;--accent:#d5a85d;--line:#293241}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;padding:0;background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{width:100%;max-width:900px;margin:0 auto;padding:0 0 28px}
-.player-head{padding:14px 16px 12px;text-align:center;background:#111}
-.player-head h1{margin:0;font-size:18px;font-weight:650}
-.player-head p{margin:5px 0 0;color:#aaa;font-size:12px}
-.player-shell{width:100%;height:calc(100svh - 66px);min-height:440px;max-height:900px;margin:0 auto;background:#000;display:flex;align-items:center;justify-content:center}
-.player-frame{display:block;width:100%;height:100%;border:0;background:#000}
-.below{padding:20px 16px;background:#f5efe3;color:#29251f;text-align:center}
-.notice{margin:0 auto 16px;max-width:680px;padding:15px;border:1px solid #e8c982;border-radius:15px;background:#fff5dd}
-.notice strong{color:#805615}
-img{display:block;width:min(100%,680px);height:auto;margin:16px auto 0;border-radius:14px}
-h2{font-size:clamp(23px,6vw,29px);margin:16px 0 5px}
-.credit{margin:18px 0 0;color:#8b8175;font-size:13px}
-.credit strong{color:#5b5147}
-@media(min-width:700px){.player-shell{height:min(82vh,820px);width:min(100%,560px);border-radius:14px;overflow:hidden}.player-head{padding:18px}}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#28364a 0%,#101722 38%,var(--bg) 75%);color:#f6f3ed;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}
+.login-wrap{min-height:100svh;display:grid;place-items:center;padding:24px}
+.login-card{width:min(100%,420px);padding:34px 28px 30px;border:1px solid #ffffff18;border-radius:28px;background:linear-gradient(145deg,#1b2431ee,#10151eee);box-shadow:0 28px 90px #0009;text-align:center}
+.mark{width:54px;height:54px;display:grid;place-items:center;margin:0 auto 22px;border-radius:18px;background:#d5a85d18;color:var(--accent);font-size:25px}
+.eyebrow{margin:0 0 9px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+h1{margin:0;font-size:30px;letter-spacing:-.04em}
+.login-card .sub{margin:12px 0 26px;color:var(--muted);font-size:14px;line-height:1.6}
+.field{text-align:left;margin:0 0 14px}
+label{display:block;margin:0 0 8px;color:#c5ccd7;font-size:12px;font-weight:650}
+input{width:100%;height:52px;padding:0 16px;border:1px solid var(--line);border-radius:14px;background:#0b1018;color:white;outline:none}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #d5a85d20}
+button{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(100deg,#e3bd79,#bd8840);color:#17130d;font-weight:800;cursor:pointer}
+.error{min-height:20px;margin:12px 0 0;color:#ff9d91;font-size:13px}
+.site{display:none;max-width:1000px;margin:auto;padding:28px 20px 54px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.brand{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
+.pill{padding:8px 12px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:11px}
+.hero{text-align:center;margin:0 auto 24px}
+.hero h2{margin:0;font-size:clamp(26px,5vw,42px);letter-spacing:-.04em}
+.hero p{margin:10px 0 0;color:var(--muted);font-size:14px}
+.player-card{max-width:520px;margin:0 auto;padding:10px;border:1px solid #ffffff18;border-radius:24px;background:linear-gradient(145deg,#1b2431,#10151e);box-shadow:0 24px 70px #0007}
+.player{width:100%;aspect-ratio:9/16;max-height:78svh;display:block;border:0;border-radius:16px;background:#000}
+.note{max-width:760px;margin:24px auto 0;padding:18px 20px;border:1px solid #d5a85d35;border-radius:18px;background:#d5a85d0d;color:#d5dbe4;font-size:14px;line-height:1.65;text-align:center}
+.note strong{color:#edc783}
+.cow{display:block;width:min(100%,560px);height:auto;margin:24px auto 0;border-radius:18px;border:1px solid #ffffff20}
+.caption{text-align:center;margin:18px 0 0;font-size:clamp(23px,4vw,30px);font-weight:800}
+.credit{text-align:center;margin:10px 0 0;color:var(--muted);font-size:12px}
+.credit strong{color:#e4bd7c}
+@media(min-width:700px){.site{padding-top:38px}.player-card{padding:12px}.player{max-height:75vh}}
 </style>
 </head>
 <body>
-<main>
-<header class="player-head"><h1>Видео из Moara de piatră</h1><p>Нажми ▶ для просмотра · ⛶ — полный экран</p></header>
-<div class="player-shell">
-<iframe class="player-frame" src="https://player.vimeo.com/video/1246377567?h=5ac0acb18f" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin" title="Видео из Moara de piatră"></iframe>
-</div>
-<section class="below">
-<div class="notice">⚠️ Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> ❤️</div>
-<img src="cow.jpg" alt="Сельский пейзаж с коровой">
-<h2>Деревенская шлюха</h2>
-<div class="credit">Разработчик <strong>sersunlovesyou</strong></div>
+<section class="login-wrap" id="login">
+  <div class="login-card">
+    <div class="mark">✦</div>
+    <p class="eyebrow">Moara de piatră</p>
+    <h1>Добро пожаловать</h1>
+    <p class="sub">Введите пароль, чтобы открыть страницу с видео.</p>
+    <form id="loginForm">
+      <div class="field"><label for="password">ПАРОЛЬ</label><input id="password" type="password" placeholder="Введите пароль" autocomplete="current-password" required></div>
+      <button type="submit">Открыть сайт</button>
+      <p class="error" id="error" aria-live="polite"></p>
+    </form>
+  </div>
 </section>
+<main class="site" id="site">
+  <div class="topline"><div class="brand">Moara de piatră</div><div class="pill">PRIVATE VIDEO</div></div>
+  <header class="hero"><h2>Видео из Moara de piatră</h2><p>Нажми ▶ для просмотра · ⛶ — полный экран</p></header>
+  <div class="player-card"><iframe class="player" src="https://player.vimeo.com/video/1246377567?h=5ac0acb18f" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin" title="Видео из Moara de piatră"></iframe></div>
+  <section class="note">⚠️ Данный видеоролик создан исключительно в юмористических целях. Мы <strong>никого не хотим обидеть или задеть</strong>. Просим воспринимать всё с добром и улыбкой. И помните: <strong>Moara de piatră — лучшее село в мире!</strong> ❤️</section>
+  <img class="cow" src="cow.jpg" alt="Сельский пейзаж с коровой">
+  <div class="caption">Деревенская шлюха</div>
+  <div class="credit">Разработчик <strong>sersunlovesyou</strong></div>
 </main>
+<script>
+const PASSWORD = "Măhăluță";
+const login = document.getElementById("login");
+const site = document.getElementById("site");
+function unlock(){login.style.display="none";site.style.display="block";}
+if(sessionStorage.getItem("moara-unlocked")==="yes") unlock();
+document.getElementById("loginForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  if(document.getElementById("password").value===PASSWORD){
+    sessionStorage.setItem("moara-unlocked","yes");unlock();
+  }else{
+    document.getElementById("error").textContent="Неверный пароль. Попробуй ещё раз.";
+    document.getElementById("password").value="";
+  }
+});
+</script>
 </body>
 </html>
